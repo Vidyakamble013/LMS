@@ -18,7 +18,7 @@ namespace LMS_App.Controllers
         {
             _logger = logger;
         }
-        [Authorize]
+
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
@@ -31,5 +31,6 @@ namespace LMS_App.Controllers
             .ToArray();
         }
     }
+
 
 }

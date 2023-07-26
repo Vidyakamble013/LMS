@@ -39,10 +39,10 @@ namespace LMS_App.LoanService
             }
         }
 
-        public async Task<bool> UpdateLoanDetails(int id , LoanModel loanModel)
+        public async Task<bool> UpdateLoanDetails( LoanModel loanModel)
         {
 
-            var result = _lmsContext.LoanDetails.Where(x => x.LoanId == id).SingleOrDefault();
+            var result = _lmsContext.LoanDetails.Where(x => x.LoanId == loanModel.LoanId).SingleOrDefault();
             if (result != null)
             {
 
@@ -77,16 +77,22 @@ namespace LMS_App.LoanService
             }
  
             }
-        public List<LoanModel> GetLoanDetails()
+        public IList<LoanModel> GetLoanDetails()
         {
+            var loanList = new List<LoanModel>();
             try
             {
-                return _lmsContext.LoanDetails.ToList();
+                var result =  _lmsContext.LoanDetails.ToList();
+                foreach (var list in result)
+                {
+                    loanList.Add(list);
+                }
             }
             catch
             {
                 throw;
             }
+            return loanList;
         }
 
         public List<LoanModel> GetLoanDetailsByLoanId(int loanId)
@@ -135,7 +141,11 @@ namespace LMS_App.LoanService
                               user.LastName
                           }).ToList();
 
-            //return result.ToList()
+            foreach (var item in result) {
+           // this.users.Add(item);
+            }
+
+
             return users.ToList();
         }
 
